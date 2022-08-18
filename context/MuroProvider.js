@@ -1,5 +1,6 @@
 
 import { createContext, useState } from "react"
+import {generarId} from '../helpers'
 
 const MuroContext = createContext()
 
@@ -7,12 +8,12 @@ const MuroProvider = ({children}) => {
 
     const [formulario, setFormulario] = useState({
         nombre: '',
-        comentario: ''
+        comentario: '',
     })
     const [comentarios, setComentarios] = useState([])
     const [error, setError] = useState(false)
 
-    const {nombre, comentario} = formulario
+    const {nombre, comentario, fecha, hora} = formulario
 
     const handleChange = e =>{
         setFormulario({
@@ -31,27 +32,32 @@ const MuroProvider = ({children}) => {
 
         setError(false)
 
+        formulario.id = generarId();
+        formulario.fecha = Date.now();
+        formulario.hora = new Date()
+
         setComentarios([
             formulario, ...comentarios
         ]);
+
         
         setFormulario({
             nombre: '',
-            comentario: ''
+            comentario: '',
         })
-
        
     }
 
     return(
         <MuroContext.Provider
             value={{
-                nombre,
-                comentario,
+                
                 handleChange,
                 handleSubmit,
                 error,
-                comentarios
+                comentarios,
+                nombre,
+                comentario,
             }}
         >
             {children}

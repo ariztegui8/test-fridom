@@ -11,7 +11,7 @@ const Home = () => {
     <div className="container mx-auto mt-10 w-1/2">
 
       <form
-        className="border-2 p-5 shadow-md bg-gray-100 mb-8"
+        className="border-2 p-5 shadow-md bg-gray-200 mb-8"
         onSubmit={handleSubmit}
       >
 
@@ -44,7 +44,7 @@ const Home = () => {
           <input 
             type="submit"
             value="Enviar"
-            className="font-semibold bg-gray-300 py-1 px-4 hover:bg-gray-400 cursor-pointer transition-all text-gray-600"
+            className="font-semibold bg-gray-400 py-1 px-4 hover:bg-gray-500 cursor-pointer transition-all text-white"
           />
         </div>
 
