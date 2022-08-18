@@ -1,18 +1,17 @@
 import React from 'react'
+import ComentarioAnterior from '../components/ComentarioAnterior';
+import Error from '../components/Error';
 import useMuro from '../hooks/useMuro'
 
 const Home = () => {
 
-  const {formulario, setFormulario, handleChange, handleSubmit} = useMuro();
-
-  const {nombre, comentario} = formulario;
-  
+  const {nombre, comentario,  handleChange, handleSubmit, error} = useMuro();
 
   return (
-    <div className="container mx-auto mt-10 w-1/2 bg-gray-100">
+    <div className="container mx-auto mt-10 w-1/2">
 
       <form
-        className="border-2 p-5 shadow-md"
+        className="border-2 p-5 shadow-md bg-gray-100 mb-8"
         onSubmit={handleSubmit}
       >
 
@@ -31,13 +30,15 @@ const Home = () => {
 
         <div className="mb-2">
           <textarea
-            placeholder='Descripcion'
+            placeholder='Descripcion...'
             className="outline-none border-2 w-full p-1 shadow-md"
             name="comentario"
             value={comentario}
             onChange={handleChange}
           ></textarea>
         </div>
+
+        {error && <Error><p>Todos los campos son obligatorios</p></Error> }
 
         <div className="w-full text-end">
           <input 
@@ -48,6 +49,9 @@ const Home = () => {
         </div>
 
       </form>
+
+      <ComentarioAnterior />
+
     </div>
   )
 }

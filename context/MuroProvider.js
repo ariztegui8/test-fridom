@@ -9,6 +9,10 @@ const MuroProvider = ({children}) => {
         nombre: '',
         comentario: ''
     })
+    const [comentarios, setComentarios] = useState([])
+    const [error, setError] = useState(false)
+
+    const {nombre, comentario} = formulario
 
     const handleChange = e =>{
         setFormulario({
@@ -19,16 +23,35 @@ const MuroProvider = ({children}) => {
 
     const handleSubmit = e =>{
         e.preventDefault();
-        console.log(formulario);
+        
+        if([nombre, comentario].includes('')){
+            setError(true)
+            return;
+        }
+
+        setError(false)
+
+        setComentarios([
+            formulario, ...comentarios
+        ]);
+        
+        setFormulario({
+            nombre: '',
+            comentario: ''
+        })
+
+       
     }
 
     return(
         <MuroContext.Provider
             value={{
-                formulario,
-                setFormulario,
+                nombre,
+                comentario,
                 handleChange,
-                handleSubmit
+                handleSubmit,
+                error,
+                comentarios
             }}
         >
             {children}
